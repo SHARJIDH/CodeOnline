@@ -1,25 +1,40 @@
-"use client"
+'use client';
+
+import { useState, useEffect } from "react";
 import { CodeEditor } from "@/components/CodeEditor";
 import { CompileAndExecute } from "@/components/CompileAndExecute";
 import { InputField } from "@/components/InputField";
 import { LanguageSelection } from "@/components/LanguageSelection";
 import { OutputField } from "@/components/OutputField";
-import { StrictMode } from "react";
+import { ChatBot } from "@/components/ChatBot";
 
 export default function HomePage() {
+  const [showChatBot, setShowChatBot] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === 'l') {
+        e.preventDefault();
+        setShowChatBot(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
-    <StrictMode>
-    <div className="w-full flex">
+    <div className="w-full flex relative">
       <div className="w-1/2">
         <CodeEditor />
       </div>
       <div className="w-1/2 p-6 space-y-6">
-        <LanguageSelection /> 
+        <LanguageSelection />
         <InputField />
         <OutputField />
-         <CompileAndExecute />
+        <CompileAndExecute />
       </div>
+      {showChatBot && <ChatBot onClose={() => setShowChatBot(false)} />}
     </div>
-    </StrictMode>
   );
 }
