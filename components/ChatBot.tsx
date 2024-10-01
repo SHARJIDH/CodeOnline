@@ -44,16 +44,16 @@ export const ChatBot: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   }, [input, messages, code, setCode]);
 
   return (
-    <div className="fixed right-5 bottom-5 w-80 h-96 bg-white rounded-lg shadow-lg flex flex-col">
+    <div className="fixed right-5 bottom-5 w-80 h-96 bg-black rounded-lg shadow-lg flex flex-col">
       <div className="p-3 border-b flex justify-between items-center">
         <span className="font-bold">ChatBot</span>
-        <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+        <button onClick={onClose} className="text-white hover:text-white">
           Close
         </button>
       </div>
       <div className="flex-1 overflow-auto p-3">
         {messages.map((msg, index) => (
-          <div key={index} className={`mb-2 ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
+          <div key={index} className={`mb-2 text-white ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
             <span className="font-bold">{msg.role === 'user' ? 'You: ' : 'Assistant: '}</span>
             {msg.content}
           </div>
