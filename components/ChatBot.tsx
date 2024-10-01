@@ -11,7 +11,7 @@ interface Message {
 export const ChatBot: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
-  const { code, setCode } = useEditorStore();
+  const { code, setCode ,language } = useEditorStore();
 
   const sendMessage = useCallback(async () => {
     if (!input.trim()) return;
@@ -24,7 +24,7 @@ export const ChatBot: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       const response = await fetch('/api/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage], code }),
+        body: JSON.stringify({ messages: [...messages, userMessage], code ,language}),
       });
 
       if (!response.ok) throw new Error('Failed to get response');

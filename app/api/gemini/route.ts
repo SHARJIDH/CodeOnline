@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export async function POST(request: NextRequest) {
-  const { messages, code } = await request.json();
+  const { messages, code ,language} = await request.json();
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
@@ -13,13 +13,16 @@ export async function POST(request: NextRequest) {
       You are an AI assistant helping with coding. The current code is:
 
       ${code}
-
+    in language ${language}
       The user's question or request is:
 
       ${messages[messages.length - 1].content}
 
       Please provide a helpful response, and if necessary, suggest changes to the code.
       just give me code nothing else that too line by line. always give complete code of the file. for example in c++ give std namespace and all also, just give code no quations and all like for example dont give like cpp and all text
+      dont forget to give full code only like std , imports everything
+      
+      
     `;
 
     const result = await model.generateContent(prompt);
