@@ -33,8 +33,9 @@ export const ChatBot: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
 
       // Apply changes to the code if suggested
-      if (data.updatedCode) {
-        setCode(data.updatedCode);
+      if (data.response) {
+        setCode(data.response);
+        console.log(code);
       }
     } catch (error) {
       console.error('Error:', error);

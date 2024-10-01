@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
       ${messages[messages.length - 1].content}
 
       Please provide a helpful response, and if necessary, suggest changes to the code.
+      just give me code nothing else that too line by line. always give complete code of the file. for example in c++ give std namespace and all also
     `;
 
     const result = await model.generateContent(prompt);
