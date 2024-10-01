@@ -14,14 +14,19 @@ export async function POST(request: NextRequest) {
 
       ${code}
     in language ${language}
+    users current interactions :
+
+      ${messages}
+      and
       The user's question or request is:
 
       ${messages[messages.length - 1].content}
+    
 
       Please provide a helpful response, and if necessary, suggest changes to the code.
       just give me code nothing else that too line by line. always give complete code of the file. for example in c++ give std namespace and all also, just give code no quations and all like for example dont give like cpp and all text
       dont forget to give full code only like std , imports everything
-      
+
       
     `;
 
