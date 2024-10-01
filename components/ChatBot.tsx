@@ -32,9 +32,9 @@ export const ChatBot: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       const data = await response.json();
       setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
 
-      // Apply changes to the code if suggested
       if (data.response) {
-        setCode(data.response);
+        const cleanedCode = data.response.replace(/```[\w-]*\n|\n```/g, '').trim();
+        setCode(cleanedCode);
         console.log(code);
       }
     } catch (error) {
