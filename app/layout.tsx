@@ -1,29 +1,27 @@
 import { MantineProvider } from "@mantine/core";
 import '@mantine/core/styles.css';
 import './globals.css';
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+
+import { ClerkProvider } from '@clerk/nextjs';
+import Header from "@/components/Header";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body>
-      <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-      
-        <MantineProvider 
-          theme={{
-            primaryColor: "dark",
-          }}
-        >
-          {children}
-        </MantineProvider>
-      </body>
-    </html>
+      <html lang="en" className="h-full">
+        <body className="flex flex-col min-h-screen">
+          <MantineProvider
+            theme={{
+              primaryColor: "dark",
+            }}
+          >
+            <Header />
+            <main className="flex-grow">
+              {children}
+            </main>
+          </MantineProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

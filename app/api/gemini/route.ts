@@ -33,9 +33,6 @@ export async function POST(request: NextRequest) {
     const result = await model.generateContent(prompt);
     const response = result.response.text();
 
-    // Here you would parse the response to extract any code changes
-    // For simplicity, we're just sending back the full response
-    // In a real implementation, you'd want to parse this more carefully
 
     return NextResponse.json({ response, updatedCode: null });
   } catch (error) {
